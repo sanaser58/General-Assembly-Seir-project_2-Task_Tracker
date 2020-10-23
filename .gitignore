@@ -1,0 +1,10 @@
+# Node/npm #
+##############
+node_modules
+.env
+
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?

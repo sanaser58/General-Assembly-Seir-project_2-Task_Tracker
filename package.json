@@ -1,0 +1,25 @@
+{
+  "name": "General-Assembly-Seir-project_2-Task_Tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanaser58/General-Assembly-Seir-project_2-Task_Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanaser58/General-Assembly-Seir-project_2-Task_Tracker/issues"
+  },
+  "homepage": "https://github.com/sanaser58/General-Assembly-Seir-project_2-Task_Tracker#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
