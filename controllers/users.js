@@ -30,8 +30,8 @@ router.post('/register', (req, res) => {
         });
     } else {
         //---------Validation Passed----------//
-        user.findOne({ email: email }).then(user => {
-            if (user) {
+        user.findOne({ email: email }).then(foundUser => {
+            if (foundUser) {
                 //---------User already exists----------//
                 errors.push({ msg: 'Email ID already exists' });
                 res.render('register', {
@@ -40,20 +40,22 @@ router.post('/register', (req, res) => {
                     email
                 });
             } else {
-                const newUser = new User({
+                const newUser = user.create({
                     name,
                     email
-                });
+                }).then(() => {
+                    req.flash(
+                        'success_msg',
+                        'You are now registered and can log in'
+                    );
+                    res.redirect('/users/login');
+                })
+                ;
+
 //---------Save user----------//
                 newUser
                     .save()
-                    .then(user => {
-                        req.flash(
-                            'success_msg',
-                            'You are now registered and can log in'
-                        );
-                        res.redirect('/users/login');
-                    })
+                    
                     .catch(err => console.log(err));
             }
         });

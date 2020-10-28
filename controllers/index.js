@@ -89,8 +89,8 @@ router.post('/user-view', (req, res) => {
 router.post('/dashboard', (req, res) => {
     const { content } = req.body;
 
-    task.findOne({ content: content, email: email }).then(task => {
-        if (task) {
+    task.findOne({ content: content, email: email }).then(foundTask => {
+        if (foundTask) {
             //---------Update existing task----------//
             let dates = task.dates, tzoffset = (new Date()).getTimezoneOffset() * 60000;
             let today = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 10);
@@ -105,8 +105,8 @@ router.post('/dashboard', (req, res) => {
                 }
                 else {
                     dates.push({ date: today, complete: 'none' });
-                    task.dates = dates;
-                    task.save()
+                    foundTask.dates = dates;
+                    foundTask.save()
                         .then(task => {
                             console.log(task);
                             res.redirect('back');
@@ -119,24 +119,16 @@ router.post('/dashboard', (req, res) => {
             let dates = [], tzoffset = (new Date()).getTimezoneOffset() * 60000;
             let localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, 10);
             dates.push({ date: localISOTime, complete: 'none' });
-            const newTask = new Task({
+            const newTask = task.create({
                 content,
                 email,
                 dates
+            }).then(task => {
+                console.log(task);
+                res.redirect('back');
             });
-
-
-
-             //---------Save Task----------//
-             newTask
-             .save()
-             .then(task => {
-                 console.log(task);
-                 res.redirect('back');
-             })
-             .catch(err => console.log(err));
-     }
- })
+        }
+    })
 });
 
 
