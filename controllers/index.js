@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 //---------User model----------//
-const User = require('../models/User');
-const Task = require('../models/Task');
+const user = require('../models/user');
+const task = require('../models/task');
 
 
 //---------Welcome Page----------//
@@ -15,10 +15,10 @@ router.get('/', (req, res) => res.render('greeting'));
 let email = "";
 router.get('/dashboard', (req, res) => {
     email = req.query.user;
-    User.findOne({
+    user.findOne({
         email: req.query.user
     }).then(user => {
-        Task.find({
+        task.find({
             email: req.query.user
         }, (err, tasks) => {
             if (err) console.log(err);
@@ -67,7 +67,7 @@ function getDates(n) {
 
 //-------------Handle Change View: Daily <--> Weekly--------------//
 router.post('/user-view', (req, res) => {
-    User.findOne({
+    user.findOne({
         email
     })
         .then(user => {
@@ -89,7 +89,7 @@ router.post('/user-view', (req, res) => {
 router.post('/dashboard', (req, res) => {
     const { content } = req.body;
 
-    Task.findOne({ content: content, email: email }).then(task => {
+    task.findOne({ content: content, email: email }).then(task => {
         if (task) {
             //---------Update existing task----------//
             let dates = task.dates, tzoffset = (new Date()).getTimezoneOffset() * 60000;
@@ -143,7 +143,7 @@ router.post('/dashboard', (req, res) => {
 //---------Dashboard Add/Remove Task to/from Favorites----------//
 router.get("/favorite-task", (req, res) => {
     let id = req.query.id;
-    Task.findOne({
+    task.findOne({
         _id: {
             $in: [
                 id
@@ -175,7 +175,7 @@ router.get("/favorite-task", (req, res) => {
 router.get("/status-update", (req, res) => {
     let d = req.query.date;
     let id = req.query.id;
-    Task.findById(id, (err, task) => {
+    task.findById(id, (err, task) => {
         if (err) {
             console.log("Error updating status!")
         }
@@ -216,7 +216,7 @@ router.get("/status-update", (req, res) => {
 //---------Deleting a task----------//
 router.get("/remove", (req, res) => {
     let id = req.query.id;
-    Task.deleteMany({
+    task.deleteMany({
         _id: {
             $in: [
                 id

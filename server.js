@@ -57,8 +57,8 @@ app.use(function (req, res, next) {
 
 
 //-----Routes---------//
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
+app.use('/', require('./controllers/index'));
+app.use('/users', require('./controllers/users'));
 
 
 app.listen(PORT, () => {
