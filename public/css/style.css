@@ -6,8 +6,10 @@
 
 
 body {
-     background-color: #A9C9FF;
-    overflow-y: auto;
+     
+     background-color: #C28899;;
+     overflow-y: auto;
+     font-size: 20px;
 }
 
 
@@ -19,12 +21,14 @@ body {
     overflow-y    : auto;
     color         : white;
     position      : absolute;
-    top           : 350px;
+    top           : 420px;
     left          : 50%;
     padding       : 20px;
     transform     : translate(-50%, -50%);
     background    : rgba(255, 255, 255, 0.1);
     border-radius : 20px;
+    font-size     : 20px;
+   
     
 }
 
