@@ -1,3 +1,4 @@
 module.exports = {
-    MongoURI: 'mongodb://localhost/task_tracker'    
+    MongoURI: 'mongodb://localhost/tasks-tracking-app'   
+     
 }
