@@ -65,7 +65,7 @@ function getDates(n) {
 }
 
 
-//-------------Handle Change View: Daily <--> Weekly--------------//
+//------------Change View: Daily <--> Weekly--------------//
 router.post('/user-view', (req, res) => {
     user.findOne({
         email
